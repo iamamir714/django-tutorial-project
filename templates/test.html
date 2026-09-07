@@ -11,7 +11,7 @@
 
     {% posts as allposts %}
     {% for post in allposts %}
-        <p>{{post}}</p>
+        <p>{{post.content|snippet:50}}</p>
     {% endfor %}
         
 </body>
