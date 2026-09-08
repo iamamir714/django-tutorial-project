@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 {% block content %}
 
 <!-- start banner Area -->
@@ -156,7 +157,7 @@
 					
 					{% include 'blog/blog-ads.html' %}
 
-					{% include 'blog/blog-post-categories.html' %}
+					{% postcategories %}
 
 					{% include 'blog/blog-newsletter.html' %}
 
