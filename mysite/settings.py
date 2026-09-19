@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'taggit',
     'django_summernote',
+    'captcha',
     'django_extensions',
     'website.apps.WebsiteConfig',
     'blogapp'
