@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'captcha',
     'django_extensions',
     'website.apps.WebsiteConfig',
-    'blogapp'
+    'blogapp',
+    'accounts'
 ]
 
 # sites framework
