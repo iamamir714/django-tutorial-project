@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blogapp.models import Post, Comment
 from blogapp.forms import CommentForm
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 def blog_view(request, **kwargs):
     posts = Post.objects.filter(status=1)
@@ -36,10 +38,13 @@ def blog_single(request, pid):
 
     posts = Post.objects.filter(status=1)
     post = get_object_or_404(posts, pk=pid)
-    comments = Comment.objects.filter(post=post.id, approved=True)
-    form = CommentForm()
-    context = {'post':post, 'comments':comments, 'form':form}
-    return render(request, 'blog/blog-single.html', context)
+    if post.login_require and not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('accounts:login'))
+    else:
+        comments = Comment.objects.filter(post=post.id, approved=True)
+        form = CommentForm()
+        context = {'post':post, 'comments':comments, 'form':form}
+        return render(request, 'blog/blog-single.html', context)
 
 def test(request):
     return render(request, 'test.html')
